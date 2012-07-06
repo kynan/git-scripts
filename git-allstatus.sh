@@ -15,10 +15,10 @@
 #   - do better filtering of git status. Might require moving this out
 #     of bash and using something like dulwich
 
-cd $HOME
-echo "Searching for git repositories.."
+echo "Searching for git repositories in `pwd`..."
 for dir in `find . -name ".git" -type d 2>/dev/null | grep -v "env" | grep -v ".virtualenv" | sed 's/\/.git//g'`
 do
+    echo
     echo "=== $dir ==="
     pushd $dir
     git status -sb
