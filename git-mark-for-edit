@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+"""Mark a range of commits for edit in a git-rebase-todo file in an
+interactive git rebase.
+
+Usage: git-mark-for-edit FILE
+
+  FILE contains SHA-1s of commits to mark for edit, one per line"""
+
+import sys
+
+if len(sys.argv) == 1:
+    print __doc__
+    sys.exit(1)
+
+with open(sys.argv[1]) as f:
+    hashes = [s.split()[0][:7] for s in f.readlines()]
+
+with sys.stdin as f:
+    for l in f:
+        h = l[5:12]
+        if h in hashes:
+            print "edit "+l[5:].strip()
+        else:
+            print l.strip()
