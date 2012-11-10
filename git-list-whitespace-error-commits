@@ -1,8 +1,0 @@
-#!/bin/bash
-
-for r in $(git rev-list --reverse $@); do
-  git diff --check ${r}^..${r} > /dev/null
-  if [ $? != 0 ]; then
-    echo $r;
-  fi;
-done

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+  echo "Usage: git rev-list-whitespace-errors <revision-range>" 1>&2
+  echo "       <revision-range> is passed to git rev-list" 1>&2
+  exit 1
+fi
+
+for r in $(git rev-list --reverse $@); do
+  git diff --check ${r}^..${r} > /dev/null
+  if [ $? != 0 ]; then
+    echo $r;
+  fi;
+done
