@@ -5,7 +5,13 @@ interactive git rebase.
 
 Usage: git-mark-for-edit FILE
 
-  FILE contains SHA-1s of commits to mark for edit, one per line"""
+  FILE contains SHA-1s of commits to mark for edit, one per line
+
+Use for git interactive rebase with vim to fixup whitespace errors:
+$ git-rev-list-whitespace-error master..HEAD > /tmp/revlist
+$ git rebase -i master
+# vim opens with git-rebase-todo
+:%!git-mark-for-edit /tmp/revlist"""
 
 import sys
 
